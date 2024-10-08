@@ -208,14 +208,14 @@ discovery.relabel "pod_logs" {
     target_label = "container"
   }
 
-  // Label creation -  "app" field from "__meta_kubernetes_pod_label_app_kubernetes_io_name"
+  // Label creation - "app" field from "__meta_kubernetes_pod_label_app_kubernetes_io_name"
   rule {
     source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_name"]
     action = "replace"
     target_label = "app"
   }
 
-  // Label creation -  "job" field from "__meta_kubernetes_namespace" and "__meta_kubernetes_pod_container_name"
+  // Label creation - "job" field from "__meta_kubernetes_namespace" and "__meta_kubernetes_pod_container_name"
   // Concatenate values __meta_kubernetes_namespace/__meta_kubernetes_pod_container_name
   rule {
     source_labels = ["__meta_kubernetes_namespace", "__meta_kubernetes_pod_container_name"]
@@ -225,8 +225,8 @@ discovery.relabel "pod_logs" {
     replacement = "$1"
   }
 
-  // Label creation - "container" field from "__meta_kubernetes_pod_uid" and "__meta_kubernetes_pod_container_name"
-  // Concatenate values __meta_kubernetes_pod_uid/__meta_kubernetes_pod_container_name.log
+  // Label creation - "__path__" field from "__meta_kubernetes_pod_uid" and "__meta_kubernetes_pod_container_name"
+  // Concatenate values __meta_kubernetes_pod_uid/__meta_kubernetes_pod_container_name
   rule {
     source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
     action = "replace"
